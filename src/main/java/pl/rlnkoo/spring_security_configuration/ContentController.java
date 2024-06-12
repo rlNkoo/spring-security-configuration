@@ -20,9 +20,4 @@ public class ContentController {
     public String handleUserHome() {
         return "home_user";
     }
-
-    @GetMapping("/login")
-    public String handleLogin() {
-        return "custom_login";
-    }
 }
