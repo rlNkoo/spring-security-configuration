@@ -3,7 +3,9 @@ package pl.rlnkoo.spring_security_configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,7 +29,7 @@ public class SecurityConfiguration {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(reqistry ->{
-                    reqistry.requestMatchers("/home", "/register/**").permitAll();
+                    reqistry.requestMatchers("/home", "/register/**", "/authenticate").permitAll();
                     reqistry.requestMatchers("/admin/**").hasRole("ADMIN");
                     reqistry.requestMatchers("/user/**").hasRole("USER");
                     reqistry.anyRequest().authenticated();
@@ -47,6 +49,11 @@ public class SecurityConfiguration {
         provider.setUserDetailsService(userDetailService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager() {
+        return new ProviderManager(authenticationProvider());
     }
 
     @Bean

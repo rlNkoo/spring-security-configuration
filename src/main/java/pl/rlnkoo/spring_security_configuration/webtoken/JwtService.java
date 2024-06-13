@@ -3,6 +3,7 @@ package pl.rlnkoo.spring_security_configuration.webtoken;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.time.Instant;
@@ -12,9 +13,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+@Service
 public class JwtService {
 
-    private static final String SECRET = "CBEA08ECB6A9C4848235457E180661998F066822E61B7CE57F8B7EE35E90D007770DD62B8F2B4B7685737177FF71575C86C28FA9E0940068B997EBAD6605C886";
+    private static final String SECRET = "2596B7B8AEE88FD3B06F7BD2919750F6CA4B99FDBD700927ED2A0EA722796085E5530101336F2994E81D0C81DE08C380856A2214BC5AD67C5B483CE333ED502D";
     private static final long VALIDITY = TimeUnit.MINUTES.toMillis(30);
 
     public String generateToken(UserDetails userDetails) {
