@@ -1,4 +1,4 @@
-# My Project
+# Spring Security Configuration
 
 ## Overview
 This project demonstrates various configurations and implementations of Spring Security, focusing on JWT token generation and general authentication and authorization mechanisms.
